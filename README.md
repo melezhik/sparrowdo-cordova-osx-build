@@ -8,7 +8,9 @@ Sparrowdo module to build cordova project for OSx.
 
     $ cd /path/to/cordova/project
 
-    $ sparrowdo --local_mode --no_sudo  --cwd=/path/to/cordova/project --module_run=Cordova::OSx::Build@team-id=AABBCCDDEE
+    $ sparrowdo --local_mode --no_sudo  \
+    --cwd=/path/to/cordova/project \
+    --module_run=Cordova::OSx::Build@team-id=AABBCCDDEE
 
 # Author
 
