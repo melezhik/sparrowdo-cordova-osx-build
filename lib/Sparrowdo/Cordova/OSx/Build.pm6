@@ -19,7 +19,11 @@ our sub tasks (%args) {
     
     bash "npm install --silent ios-deploy";
     
-    bash "pod setup 1>/dev/null";
+    bash "pod setup 1>/dev/null", %(
+      envvars => %(
+        LANG => "en_US.UTF-8"
+      )
+    );
 
     bash "npm run --silent cordova -- platform add ios";
     
