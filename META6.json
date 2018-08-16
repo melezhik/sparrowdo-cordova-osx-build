@@ -11,7 +11,7 @@
   "name" : "Sparrowdo::Cordova::OSx::Build",
   "perl" : "6.*",
   "provides" : {
-    "Sparrowdo::Cordova::Build" : "lib/Sparrowdo/Cordova/OSx/Build.pm6"
+    "Sparrowdo::Cordova::OSx::Build" : "lib/Sparrowdo/Cordova/OSx/Build.pm6"
   },
   "resources" : [
   ],
