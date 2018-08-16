@@ -9,13 +9,6 @@ use Sparrowdo::Core::DSL::Bash;
 
 our sub tasks (%args) {
 
-    template-create 'Build.json', %(
-      source => ( slurp %?RESOURCES<Build.json> ),
-      variables => %(
-        team_id => %args<team-id>
-      ),
-    );
-    
     directory "www";
     
     bash "npm install --silent";
