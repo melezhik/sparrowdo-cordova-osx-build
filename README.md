@@ -8,7 +8,7 @@ Sparrowdo module to build cordova project for OSx.
       team-id => "AAF04QW46Z" # team id
     );
 
-    $ cd /path/to/cordoav/project/
+    $ cd /path/to/cordova/project/
 
     $ sparrowdo --local_mode --no_sudo --cwd=$PWD
 
