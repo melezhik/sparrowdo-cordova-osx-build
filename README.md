@@ -2,15 +2,13 @@
 
 Sparrowdo module to build cordova project for OSx.
 
-    $ cat sparrowfile
+# USAGE
 
-    module_run "Cordova::OSx::Build", %(
-      team-id => "AAF04QW46Z" # team id
-    );
+    $ zef install --/test https://github.com/melezhik/sparrowdo-cordova-osx-build.git --force-install
 
-    $ cd /path/to/cordova/project/
+    $ cd /path/to/cordova/project
 
-    $ sparrowdo --local_mode --no_sudo --cwd=$PWD
+    $ sparrowdo --local_mode --no_sudo  --cwd=/path/to/cordova/project --module_run=Cordova::OSx::Build@team-id=AABBCCDDEE
 
 # Author
 
