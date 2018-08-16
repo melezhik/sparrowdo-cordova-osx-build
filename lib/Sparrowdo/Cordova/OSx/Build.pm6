@@ -20,6 +20,8 @@ our sub tasks (%args) {
     bash "npm install --silent ios-deploy";
     
     bash "pod setup 1>/dev/null";
+
+    bash "npm run --silent cordova -- platform add ios";
     
     bash "npm run --silent cordova -- prepare ios";
     
