@@ -13,8 +13,7 @@
   "provides" : {
     "Sparrowdo::Cordova::OSx::Build" : "lib/Sparrowdo/Cordova/OSx/Build.pm6"
   },
-  "resources" : [
-  ],
+  "resources" : [ ],
   "source-type" : "git",
   "source-url" : "https://github.com/melezhik/sparrowdo-cordova-osx-build.git",
   "support" : {
