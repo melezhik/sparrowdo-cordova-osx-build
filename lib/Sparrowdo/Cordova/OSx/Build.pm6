@@ -33,7 +33,9 @@ our sub tasks (%args) {
     
     bash "rm -rfv ./platforms/ios/build/device/*.ipa";
 
-    bash "security unlock-keychain -p {%args<keychain-password>} ~/Library/Keychains/login.keychain-db";
+    bash "security unlock-keychain -p {%args<keychain-password>} ~/Library/Keychains/login.keychain-db", %(
+      description => "security unlock-keychain -p ****** ~/Library/Keychains/login.keychain-db"
+    );
     
     bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
       expect_stdout => 'EXPORT SUCCEEDED',
