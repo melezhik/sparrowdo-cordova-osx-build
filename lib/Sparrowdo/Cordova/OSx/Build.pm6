@@ -9,7 +9,7 @@ use Sparrowdo::Core::DSL::Bash;
 
 our sub tasks (%args) {
 
-    my $keychain-password = %args<keychain-password> or die "keychain-password required";
+    my $keychain-password = %args<keychain-password>;
 
     directory "www";
     
@@ -35,9 +35,11 @@ our sub tasks (%args) {
     
     bash "rm -rfv ./platforms/ios/build/device/*.ipa";
 
-    #bash "security unlock-keychain -p {%args<keychain-password>} ~/Library/Keychains/login.keychain-db", %(
-    #  description => "security unlock-keychain -p ****** ~/Library/Keychains/login.keychain-db"
-    #);
+    if $keychain-password {
+      bash "security unlock-keychain -p $keychain-password ~/Library/Keychains/login.keychain-db", %(
+        description => "security unlock-keychain -p ****** ~/Library/Keychains/login.keychain-db"
+      );
+    }
 
     bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
       expect_stdout => 'EXPORT SUCCEEDED',
