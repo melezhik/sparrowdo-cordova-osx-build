@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.0.3  2018-08-21T20:07:47Z
+
     - Make install less noisy
 
     - Keychain access unlock optionally
