@@ -43,6 +43,8 @@ our sub tasks (%args) {
       );
     }
 
+    bash "defaults write com.apple.dt.Xcode DVTDeveloperAccountUseKeychainService -bool NO";
+
     bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
       expect_stdout => 'EXPORT SUCCEEDED',
       debug => 1,
