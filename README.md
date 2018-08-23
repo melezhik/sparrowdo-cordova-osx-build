@@ -19,6 +19,11 @@ Your apple team ID.
 
 Password to unlock keychain access. Optional.
 
+## skip-pod-setup
+
+Skip `pod setup` command:
+
+    skip-pod-setup=1
 
 # Author
 
