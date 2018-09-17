@@ -13,8 +13,8 @@
   "provides" : {
     "Sparrowdo::Cordova::OSx::Build" : "lib/Sparrowdo/Cordova/OSx/Build.pm6"
   },
-  "resources" : [ 
-      "manual-signing.json"
+  "resources" : [
+    "manual-signing.json"
   ],
   "source-type" : "git",
   "source-url" : "https://github.com/melezhik/sparrowdo-cordova-osx-build.git",
@@ -22,5 +22,5 @@
   },
   "tags" : [ ],
   "test-depends" : [ ],
-  "version" : "0.0.3"
+  "version" : "0.0.4"
 }
