@@ -45,12 +45,26 @@ our sub tasks (%args) {
 
     bash "defaults write com.apple.dt.Xcode DVTDeveloperAccountUseKeychainService -bool NO";
 
-    bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
-      expect_stdout => 'EXPORT SUCCEEDED',
-      debug => 1,
-      description => "cordova build"
-    );
-    
+    if %args<manual-signing> {
+      template-create "manual-signing.json", %(
+        source => ( slurp %?RESOURCES<manual-signing.json> ),
+        variables => %( 
+          team      => %args<team-id>,
+          profile   =>  %args<profile>,
+        )
+      );
+      bash "npm run --silent ionic -- cordova build ios --device --buildConfig=manual-signing.json", %(
+        expect_stdout => 'EXPORT SUCCEEDED',
+        debug => 1,
+        description => "cordova build"
+      );
+    } else {
+        bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
+          expect_stdout => 'EXPORT SUCCEEDED',
+          debug => 1,
+          description => "cordova build"
+        );
+    }
     bash "ls -l platforms/ios/build/device";
     
     bash 'find . -type f -name "*.ipa" | wc -l', %( expect_stdout => 1 );
