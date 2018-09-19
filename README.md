@@ -7,7 +7,7 @@ Sparrowdo module to build cordova project for OSx.
     $ zef install Sparrowdo::Cordova::OSx::Build
 
     $ sparrowdo --local_mode --no_sudo --cwd=/path/to/cordova/project \
-    --module_run=Cordova::OSx::Build@team-id=AABBCCDDEE;keychain-password => "pAsSword"
+    --module_run=Cordova::OSx::Build@team-id=AABBCCDDEE,keychain-password=pAsSword
 
 # Parameters
 
@@ -29,7 +29,7 @@ Skip `pod setup` command:
 
 If set creates manual signed build with given provisioning profile:
 
-    sparrowdo --local_mode --no_sudo --module_run=Cordova::OSx::Build@team-id=72F84QW26V,\
+    sparrowdo --local_mode --no_sudo --module_run=Cordova::OSx::Build@team-id=AABBCCDDEE,\
     profile=afdc3c04-ba2d-4817-1a97-62d810e4c5ac,\
     manual-signing=OK
 
