@@ -29,7 +29,7 @@ our sub tasks (%args) {
       );
     }
 
-    bash "npm run --silent cordova -- platform add ios";
+    bash "npm run --silent cordova -- platform add ios; echo";
     
     bash "npm run --silent cordova -- prepare ios";
     
