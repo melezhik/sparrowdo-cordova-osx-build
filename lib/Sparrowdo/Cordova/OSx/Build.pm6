@@ -27,6 +27,13 @@ our sub tasks (%args) {
       )
     );
 
+    if %args<configure-command> {
+      bash %args<configure-command>, %(
+        description => "configure",
+        debug => 1,
+      )
+    }
+
     bash "npm run --silent cordova -- platform add ios";
     
     bash "npm run --silent cordova -- prepare ios";

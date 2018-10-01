@@ -19,6 +19,7 @@ Your apple team ID.
 
 Password to unlock keychain access. Optional.
 
+## configure
 
 # Author
 
