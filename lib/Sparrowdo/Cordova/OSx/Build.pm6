@@ -1,6 +1,6 @@
 use v6;
 
-unit module Sparrowdo::Cordova::OSx::Build:ver<0.0.3>;
+unit module Sparrowdo::Cordova::OSx::Build:ver<0.0.5>;
 
 use Sparrowdo;
 use Sparrowdo::Core::DSL::Template;
@@ -20,13 +20,8 @@ our sub tasks (%args) {
     bash "npm install --silent cordova";
     
     bash "npm install --silent ios-deploy";
-    
-    bash "pod setup 1>/dev/null", %(
-      envvars => %(
-        LANG => "en_US.UTF-8"
-      )
-    );
 
+<<<<<<< HEAD
     if %args<configure-command> {
       bash %args<configure-command>, %(
         description => "configure",
@@ -35,6 +30,17 @@ our sub tasks (%args) {
     }
 
     bash "npm run --silent cordova -- platform add ios";
+=======
+    unless %args<skip-pod-setup> {    
+      bash "pod setup 1>/dev/null", %(
+        envvars => %(
+          LANG => "en_US.UTF-8"
+        )
+      );
+    }
+
+    bash "npm run --silent cordova -- platform add ios; echo";
+>>>>>>> eb028eca82cdbb72c28e17d7ebaad76a7c64bef4
     
     bash "npm run --silent cordova -- prepare ios";
     
@@ -48,12 +54,28 @@ our sub tasks (%args) {
       );
     }
 
-    bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
-      expect_stdout => 'EXPORT SUCCEEDED',
-      debug => 1,
-      description => "cordova build"
-    );
-    
+    bash "defaults write com.apple.dt.Xcode DVTDeveloperAccountUseKeychainService -bool NO";
+
+    if %args<manual-signing> {
+      template-create "manual-signing.json", %(
+        source => ( slurp %?RESOURCES<manual-signing.json> ),
+        variables => %( 
+          team      => %args<team-id>,
+          profile   =>  %args<profile>,
+        )
+      );
+      bash "npm run --silent ionic -- cordova build ios --device --buildConfig=manual-signing.json", %(
+        expect_stdout => 'EXPORT SUCCEEDED',
+        debug => 1,
+        description => "cordova build"
+      );
+    } else {
+        bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
+          expect_stdout => 'EXPORT SUCCEEDED',
+          debug => 1,
+          description => "cordova build"
+        );
+    }
     bash "ls -l platforms/ios/build/device";
     
     bash 'find . -type f -name "*.ipa" | wc -l', %( expect_stdout => 1 );
