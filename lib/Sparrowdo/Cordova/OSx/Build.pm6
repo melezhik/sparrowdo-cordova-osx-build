@@ -21,7 +21,6 @@ our sub tasks (%args) {
     
     bash "npm install --silent ios-deploy";
 
-<<<<<<< HEAD
     if %args<configure-command> {
       bash %args<configure-command>, %(
         description => "configure",
@@ -29,8 +28,6 @@ our sub tasks (%args) {
       )
     }
 
-    bash "npm run --silent cordova -- platform add ios";
-=======
     unless %args<skip-pod-setup> {    
       bash "pod setup 1>/dev/null", %(
         envvars => %(
@@ -40,7 +37,6 @@ our sub tasks (%args) {
     }
 
     bash "npm run --silent cordova -- platform add ios; echo";
->>>>>>> eb028eca82cdbb72c28e17d7ebaad76a7c64bef4
     
     bash "npm run --silent cordova -- prepare ios";
     
