@@ -43,8 +43,6 @@ If set creates manual signed build with given provisioning profile:
 
 Sets provisioning profile, see `manual-signing` parameter.
 
->>>>>>> eb028eca82cdbb72c28e17d7ebaad76a7c64bef4
-
 # Author
 
 Alexey Melezhik
