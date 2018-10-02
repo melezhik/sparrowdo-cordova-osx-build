@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.0.6  2018-10-02T19:06:05Z
+
     - Make platform add ios command idempotent
 
     - Configure command
