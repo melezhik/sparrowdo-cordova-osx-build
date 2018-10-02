@@ -1,6 +1,6 @@
 use v6;
 
-unit module Sparrowdo::Cordova::OSx::Build:ver<0.0.5>;
+unit module Sparrowdo::Cordova::OSx::Build:ver<0.0.6>;
 
 use Sparrowdo;
 use Sparrowdo::Core::DSL::Template;
