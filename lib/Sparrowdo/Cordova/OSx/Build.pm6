@@ -25,6 +25,11 @@ our sub tasks (%args) {
       );
     }
 
+    bash "perl {%?RESOURCES<configure.pl>}", %(
+      description => "perl configure.pl",
+      debug => 1,
+    );
+
     if (%args<rm-platform>) {
       bash "npm run --silent cordova -- platform rm ios", %( description => "cordova platform rm ios" );
       bash "npm run --silent cordova -- platform add ios", %( description => "cordova platform add ios" );
@@ -45,11 +50,6 @@ our sub tasks (%args) {
     }
 
     bash "defaults write com.apple.dt.Xcode DVTDeveloperAccountUseKeychainService -bool NO";
-
-    bash "perl {%?RESOURCES<configure.pl>}", %(
-      description => "perl configure.pl",
-      debug => 1,
-    );
 
     if %args<manual-signing> {
       template-create "manual-signing.json", %(
