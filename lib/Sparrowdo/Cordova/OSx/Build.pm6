@@ -17,7 +17,7 @@ our sub tasks (%args) {
     
     bash "npm install --silent ios-deploy";
 
-    bash "perl {%?RESOURCES<configure.pl>}, %(
+    bash "perl {%?RESOURCES<configure.pl>}", %(
       description => "configure",
       debug => 1,
     );
