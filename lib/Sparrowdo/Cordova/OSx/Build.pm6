@@ -15,7 +15,7 @@ our sub tasks (%args) {
     
     bash "npm install --silent", %( description => "npm install" );
     
-    bash "npm install --silent ios-deploy", %( description => "npm install ios-deploy" );
+    bash "npm install --silent ios-deploy 1>/dev/null", %( description => "npm install ios-deploy" );
 
     unless %args<skip-pod-setup> {    
       bash "pod setup 1>/dev/null", %(
