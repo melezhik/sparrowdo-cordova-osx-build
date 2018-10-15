@@ -15,18 +15,12 @@ our sub tasks (%args) {
     
     bash "npm install --silent";
     
-    bash "npm install --silent ionic";
-    
-    bash "npm install --silent cordova";
-    
     bash "npm install --silent ios-deploy";
 
-    if %args<configure-command> {
-      bash %args<configure-command>, %(
-        description => "configure",
-        debug => 1,
-      )
-    }
+    bash "perl ".(%?RESOURCES<configure.pl>), %(
+      description => "configure",
+      debug => 1,
+    );
 
     unless %args<skip-pod-setup> {    
       bash "pod setup 1>/dev/null", %(
@@ -36,8 +30,6 @@ our sub tasks (%args) {
       );
     }
 
-    bash "npm run --silent cordova -- platform add ios; echo";
-    
     bash "npm run --silent cordova -- prepare ios";
     
     bash "npm run cordova -- requirements ios";
@@ -60,18 +52,19 @@ our sub tasks (%args) {
           profile   =>  %args<profile>,
         )
       );
-      bash "npm run --silent ionic -- cordova build ios --device --buildConfig=manual-signing.json", %(
+      bash "npm run --silent cordova -- build ios --device --buildConfig=manual-signing.json", %(
         expect_stdout => 'EXPORT SUCCEEDED',
         debug => 1,
         description => "cordova build"
       );
     } else {
-        bash "npm run --silent ionic -- cordova build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
+        bash "npm run --silent cordova -- build ios --device -- --buildFlag='DEVELOPMENT_TEAM={%args<team-id>}' --buildFlag='-allowProvisioningUpdates'", %(
           expect_stdout => 'EXPORT SUCCEEDED',
           debug => 1,
           description => "cordova build"
         );
     }
+
     bash "ls -l platforms/ios/build/device";
     
     bash 'find . -type f -name "*.ipa" | wc -l', %( expect_stdout => 1 );

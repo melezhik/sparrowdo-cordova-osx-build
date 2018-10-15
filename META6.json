@@ -14,6 +14,7 @@
     "Sparrowdo::Cordova::OSx::Build" : "lib/Sparrowdo/Cordova/OSx/Build.pm6"
   },
   "resources" : [
+    "configure.pl",
     "manual-signing.json"
   ],
   "source-type" : "git",
