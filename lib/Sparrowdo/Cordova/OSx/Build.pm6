@@ -13,12 +13,12 @@ our sub tasks (%args) {
 
     directory "www";
     
-    bash "npm install --silent";
+    bash "npm install --silent", %( description => "npm install" );
     
-    bash "npm install --silent ios-deploy";
+    bash "npm install --silent ios-deploy", %( description => "npm install ios-deploy" );
 
-    bash "perl {%?RESOURCES<configure.pl>}, %(
-      description => "configure",
+    bash "perl {%?RESOURCES<configure.pl>}", %(
+      description => "perl configure.pl",
       debug => 1,
     );
 
@@ -30,9 +30,9 @@ our sub tasks (%args) {
       );
     }
 
-    bash "npm run --silent cordova -- prepare ios";
+    bash "npm run --silent cordova -- prepare ios", %( description => "cordova prepare ios" );
     
-    bash "npm run cordova -- requirements ios";
+    bash "npm run cordova -- requirements ios", %( description => "cordova requirements ios" );
     
     bash "rm -rfv ./platforms/ios/build/device/*.ipa";
 
