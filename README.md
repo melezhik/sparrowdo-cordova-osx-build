@@ -43,6 +43,13 @@ If set creates manual signed build with given provisioning profile:
 
 Sets provisioning profile, see `manual-signing` parameter.
 
+## platform-rm
+
+Run `cordova platform rm ios` before every build, to ensure we run in 100% clean state. Be aware
+that this increases build time. The options is desabled by default.
+
+
+
 # Author
 
 Alexey Melezhik

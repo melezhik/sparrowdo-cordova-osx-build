@@ -25,6 +25,10 @@ our sub tasks (%args) {
       );
     }
 
+    if (%args<rm-platform>) {
+      bash "npm run --silent cordova -- platform rm ios", %( description => "cordova platform rm ios" );
+    }
+
     bash "npm run --silent cordova -- prepare ios", %( description => "cordova prepare ios" );
     
     bash "npm run cordova -- requirements ios", %( description => "cordova requirements ios" );
