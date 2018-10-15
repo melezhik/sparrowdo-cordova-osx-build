@@ -76,6 +76,10 @@ our sub tasks (%args) {
     
     bash 'find . -type f -name "*.ipa" | wc -l', %( expect_stdout => 1 );
     
+    bash "rm -rf binaries/ && mkdir binaries && cp platforms/ios/build/device/*.ipa binaries/", %(
+          debug => 1,
+          description => "copy binaries"
+    );
 }
 
 
