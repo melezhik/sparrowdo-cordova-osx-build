@@ -17,11 +17,6 @@ our sub tasks (%args) {
     
     bash "npm install --silent ios-deploy", %( description => "npm install ios-deploy" );
 
-    bash "perl {%?RESOURCES<configure.pl>}", %(
-      description => "perl configure.pl",
-      debug => 1,
-    );
-
     unless %args<skip-pod-setup> {    
       bash "pod setup 1>/dev/null", %(
         envvars => %(
@@ -43,6 +38,11 @@ our sub tasks (%args) {
     }
 
     bash "defaults write com.apple.dt.Xcode DVTDeveloperAccountUseKeychainService -bool NO";
+
+    bash "perl {%?RESOURCES<configure.pl>}", %(
+      description => "perl configure.pl",
+      debug => 1,
+    );
 
     if %args<manual-signing> {
       template-create "manual-signing.json", %(
