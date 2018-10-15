@@ -5,7 +5,7 @@ use strict;
 use File::Copy;
 
 my $root_dir = $ENV{BUILD_SOURCESDIRECTORY};
-my $source_code_branch = $ENV{BUILD_SOURCEBRNACHNAME};
+my $source_code_branch = $ENV{BUILD_SOURCEBRACHNAME};
 
 my $target = 'ios';
 
