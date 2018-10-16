@@ -19,12 +19,6 @@ Your apple team ID.
 
 Password to unlock keychain access. Optional.
 
-## configure-command
-
-Arbitrary configure command to be run configure build.
-
-    configure-command => "npm run config-script"
-
 ## skip-pod-setup
 
 Skip `pod setup` command:
@@ -48,6 +42,57 @@ Sets provisioning profile, see `manual-signing` parameter.
 Run `cordova platform rm ios` before every build, to ensure we run in 100% clean state. Be aware
 that this increases build time. The options is desabled by default.
 
+
+# Per branche/env configurations
+
+Modules supports source branches configuration int two flavors:
+
+## Data configuration
+
+The method copies "branch specific" files to `src/assets/jsons/` directory.
+
+The data files should be located at `src/env/$target/$source_code_branch/.*json` where:
+
+- `$source_code_branch` is SCM branch name
+- `$target` is `ios`
+
+Example:
+
+    # target = ios
+    # $source_code_branch = production
+
+    cp -r src/env/ios/production/*.json src/assets/jsons/
+
+## Command configuration
+
+The method executed "branch specific" windows commands.
+
+Command files should be located at `src/env/$target/$source_code_branch/` where:
+
+- `$source_code_branch` is SCM branch name
+- `$target` is `ios`
+
+The commands are executed in order defined by their files names ( alphabetic order )
+
+Example:
+
+    # $source_code_branch = production
+
+    ls -1 src/env/ios/production/
+
+    00-command.sh # executed  first
+    01-command.sh # executed  second
+    02-command.sh # excecuted third, so on
+
+You can use Perl scripts as well:
+
+    00-command.sh # windows batch script
+    01-command.pl # Perl script
+    02-command.pl # Perl script
+
+You may define `default` branch to execute command for any branch not matching listed branches:
+
+    src/env/$target/default/
 
 
 # Author

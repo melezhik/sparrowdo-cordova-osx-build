@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+0.0.7  2018-10-16T14:19:02Z
+
     - Add per branch configuration support
 
     - Remove ionic dependency 
