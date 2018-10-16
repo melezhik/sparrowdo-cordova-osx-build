@@ -39,7 +39,7 @@ our sub tasks (%args) {
 
     bash "npm run --silent cordova -- prepare ios", %( description => "cordova prepare ios" );
     
-    bash "npm run cordova -- requirements ios", %( description => "cordova requirements ios" );
+    bash "npm run cordova -- requirements ios; echo", %( description => "cordova requirements ios" );
     
     bash "rm -rfv ./platforms/ios/build/device/*.ipa";
 
