@@ -72,10 +72,8 @@ our sub tasks (%args) {
         );
     }
 
-    bash "ls -l platforms/ios/build/device";
-    
-    bash 'find . -type f -name "*.ipa" | wc -l', %( expect_stdout => 1 );
-    
+    bash "ls -l platforms/ios/build/device/*.ipa";
+   
     bash "rm -rf binaries/ && mkdir binaries && cp platforms/ios/build/device/*.ipa binaries/", %(
           debug => 1,
           description => "copy binaries"
